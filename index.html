@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div class="form">
+        <input type="email" name="" id="txtemail" placeholder="Email">
+        <br>
+        <input type="password" name="" id="txtpw" placeholder="Password">
+        <br>
+        <input type="button" value="Sign Up" id="btnsignup">
+    </div>
+
+
+    <div class="form">
+        <input type="email" name="" id="txtemaillgoin" placeholder="Email">
+        <br>
+        <input type="password" name="" id="txtpwlogin" placeholder="Password">
+        <br>
+        <input type="button" value="login" id="btnlogin">
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-auth.js";
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBY_x2rUhOaHVSqTgohCOetnp0-uR_oHT4",
+            authDomain: "emaillgoinauth.firebaseapp.com",
+            projectId: "emaillgoinauth",
+            storageBucket: "emaillgoinauth.appspot.com",
+            messagingSenderId: "991522430378",
+            appId: "1:991522430378:web:4343d478f03d4358d2dfd3",
+            measurementId: "G-MS8W07K5RP"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        var btnsignup = document.getElementById('btnsignup')
+
+        function signup() {
+            var email = document.getElementById('txtemail').value
+            var password = document.getElementById('txtpw').value
+            // alert(`email:- ${email}`)
+
+
+
+            const auth = getAuth();
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log(user)
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorMessage)
+                    // ..
+                });
+        }
+        btnsignup.addEventListener('click', signup)
+
+
+        var btnlgoin = document.getElementById('btnlogin')
+
+        function login() {
+            var email = document.getElementById('txtemaillgoin').value
+            var password = document.getElementById('txtpwlogin').value
+            // alert(`email:- ${email}`)
+
+
+
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log(user)
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorMessage)
+                    // ..
+                });
+        }
+        btnlgoin.addEventListener('click', login)
+
+    </script>
+</body>
+
+</html>
